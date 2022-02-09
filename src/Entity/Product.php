@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -11,16 +12,21 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("products:read")]
+
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("products:read")]
     private $model;
 
     #[ORM\Column(type: 'text')]
+    #[Groups("products:read")]
     private $description;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("products:read")]
     private $brand;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'products')]
