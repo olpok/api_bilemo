@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CustomerRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
@@ -11,9 +12,11 @@ class Customer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("customers:read")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("customers:read")]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
