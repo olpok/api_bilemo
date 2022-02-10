@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
@@ -17,15 +18,25 @@ class Customer
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups("customers:read")]
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire.')]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("customer:show")]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("customer:show")]
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: '{{ value }} n\'est pas un email valide.',
+    )]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("customer:show")]
+    #[Assert\NotBlank(message: 'Le numéro de téléphone est obligatoire.')]
     private $phone;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'customers')]
