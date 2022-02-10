@@ -27,7 +27,18 @@ class ApiCustomerController extends AbstractController
     }
 
     /**
-     * @Route("/api/customer", name="api_customer_item_post",  methods={"POST"})
+     * @Route("api/customers/{id}", name="api_customers_item_get", methods={"GET"})
+     */
+    public function item(Customer $customer): Response
+    {
+        return $this->json(
+        $customer, 200, [],
+        ["groups" => "customer:show"]   
+        );
+    }
+
+    /**
+     * @Route("/api/customers", name="api_customers_item_post",  methods={"POST"})
      */   
     public function post(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
 
