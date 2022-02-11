@@ -63,4 +63,15 @@ class ApiCustomerController extends AbstractController
         } 
 
     }
+
+    /**
+     * @Route("api/customers/{id}", name="api_customers_item_delete", methods={"DELETE"})
+     */
+    public function delete(Customer $customer, EntityManagerInterface $entityManager) {
+        $entityManager->remove($customer);
+        $entityManager->flush();
+
+        return $this->json(null, 204);
+    }
+
 }
