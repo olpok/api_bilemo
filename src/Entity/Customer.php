@@ -13,11 +13,11 @@ class Customer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups("customers:read")]
+    #[Groups(['customers:read', 'customer:show'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups("customers:read")]
+    #[Groups(['customers:read', 'customer:show'])]
     #[Assert\NotBlank(message: 'Le prénom est obligatoire.')]
     private $firstname;
 

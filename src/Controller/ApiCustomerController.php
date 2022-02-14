@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Customer;
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,15 +17,26 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiCustomerController extends AbstractController
 {
     /**
+     * @Route("/api/user/{id}", name="api_user_collection_get", methods={"GET"})
+     */
+    public function collection(User $user): Response
+    {
+        return $this->json(
+        $user, 200, [],
+        ["groups" => "customers:read"]   
+        ); 
+    }
+
+    /**
      * @Route("/api/customers", name="api_customers_collection", methods={"GET"})
      */
-    public function collection(CustomerRepository $customerRepository): Response
+  /*  public function collection(User $user, CustomerRepository $customerRepository): Response
     {
         return $this->json(
         $customerRepository->findAll(), 200, [],
         ["groups" => "customer:show"]   
         ); 
-    }
+    }*/
 
     /**
      * @Route("api/customers/{id}", name="api_customers_item_get", methods={"GET"})
