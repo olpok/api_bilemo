@@ -78,6 +78,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Double a visual identifier that represents this user by username for LexikJWTAuthenticationBundle
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
