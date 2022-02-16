@@ -12,21 +12,21 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups("products:read")]
+    #[Groups(['products:list', 'product:read'])]
 
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups("products:read")]
+    #[Groups(['products:list', 'product:read'])]
     private $model;
 
     #[ORM\Column(type: 'text')]
-    #[Groups("products:read")]
+    #[Groups(['product:read'])]
     private $description;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups("products:read")]
+    #[Groups("product:read")]
     private $brand;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'products')]
