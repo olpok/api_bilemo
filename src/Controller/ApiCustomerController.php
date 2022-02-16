@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiCustomerController extends AbstractController
 {
     /**
-     * @Route("/api/user/{id}", name="api_user_collection_get", methods={"GET"})
+     * @Route("/api/user/{id}", name="api_user_customers_collection_get", methods={"GET"})
      */
     public function collection(User $user): Response
     {
@@ -28,15 +28,15 @@ class ApiCustomerController extends AbstractController
     }
 
     /**
-     * @Route("/api/customers", name="api_customers_collection", methods={"GET"})
+     * @Route("/api/customers", name="api_allcustomers_collection", methods={"GET"})
      */
-  /*  public function collection(User $user, CustomerRepository $customerRepository): Response
+    public function allCollection(CustomerRepository $customerRepository): Response
     {
         return $this->json(
         $customerRepository->findAll(), 200, [],
         ["groups" => "customer:show"]   
         ); 
-    }*/
+    }
 
     /**
      * @Route("api/customers/{id}", name="api_customers_item_get", methods={"GET"})
