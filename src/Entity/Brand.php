@@ -17,7 +17,7 @@ class Brand
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups("products:read")]
+    #[Groups("product:read")]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Product::class, orphanRemoval: true)]

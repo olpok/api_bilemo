@@ -13,18 +13,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ApiProductController extends AbstractController
 {
     /**
-     * @Route("/api/product", name="api_product_collection", methods={"GET"})
+     * @Route("/api/products", name="api_products_collection", methods={"GET"})
      */
     public function collection(ProductRepository $productRepository): Response
     {
         return $this->json(
         $productRepository->findAll(), 200, [],
-        ["groups" => "products:read"]   
+        ["groups" => "products:list"]   
         );         
     }
 
     /**
-     * @Route("/api/product/{id}", name="api_product_item_get",  methods={"GET"})
+     * @Route("/api/products/{id}", name="api_products_item_get",  methods={"GET"})
      * @param Product $product
      * @return Response
      */
@@ -32,7 +32,7 @@ class ApiProductController extends AbstractController
     {
         return $this->json(
         $product, 200, [],
-        ["groups" => "products:read"]   
+        ["groups" => "product:read"]   
         );
     }
 }
