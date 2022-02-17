@@ -58,8 +58,11 @@ class ApiCustomerController extends AbstractController
      */   
     public function post(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
 
+        
         try{
+            $user = $this->getUser();
             $customer= $serializer->deserialize($request->getContent(), Customer::class, 'json');
+            $customer->setClient($user); 
 
             $errors = $validator->validate($customer);
 

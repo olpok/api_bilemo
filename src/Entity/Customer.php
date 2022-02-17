@@ -45,6 +45,7 @@ class Customer
     private $phone;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'customers')]
+    #[Groups("customer:show")]
     private $client;
 
     public function getId(): ?int
