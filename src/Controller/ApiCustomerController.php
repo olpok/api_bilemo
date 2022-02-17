@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
@@ -18,6 +19,7 @@ class ApiCustomerController extends AbstractController
 {
     /**
      * @Route("/api/user/{id}", name="api_user_customers_collection_get", methods={"GET"})
+     * @Cache(expires="+1 month", public=true)
      */
     public function collection(User $user): Response
     {
@@ -29,6 +31,7 @@ class ApiCustomerController extends AbstractController
 
     /**
      * @Route("/api/customers", name="api_allcustomers_collection", methods={"GET"})
+     * @Cache(expires="+1 month", public=true)
      */
     public function allCollection(CustomerRepository $customerRepository): Response
     {
@@ -40,6 +43,7 @@ class ApiCustomerController extends AbstractController
 
     /**
      * @Route("api/customers/{id}", name="api_customers_item_get", methods={"GET"})
+     * @Cache(expires="+1 month", public=true)
      */
     public function item(Customer $customer): Response
     {
