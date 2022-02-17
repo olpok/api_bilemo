@@ -6,8 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
+#[UniqueEntity(
+    fields: ['email'],
+    message: 'Cette adresse email existe déjà!'
+)]
 class Customer
 {
     #[ORM\Id]
@@ -26,7 +31,7 @@ class Customer
     #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
     private $lastname;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Groups("customer:show")]
     #[Assert\NotBlank]
     #[Assert\Email(
